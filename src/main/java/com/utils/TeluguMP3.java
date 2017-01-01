@@ -1,4 +1,4 @@
-package com.walmart;
+package com.utils;
 
 import java.io.*;
 import java.net.MalformedURLException;

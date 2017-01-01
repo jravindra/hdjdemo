@@ -1,4 +1,4 @@
-package com.walmart;
+package com.utils;
 
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;

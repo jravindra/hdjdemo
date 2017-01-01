@@ -1,4 +1,4 @@
-package com.walmart;
+package com.utils;
 
 /**
  * Hello world!

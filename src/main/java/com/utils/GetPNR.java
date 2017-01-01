@@ -1,4 +1,4 @@
-package com.walmart;
+package com.utils;
 
 /**
  * Created by rjaraja on 8/14/16.
