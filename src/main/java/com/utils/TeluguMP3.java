@@ -14,22 +14,51 @@ import java.util.regex.Pattern;
  */
 public class TeluguMP3 {
     public static void main(String[] args) throws MalformedURLException, UnsupportedEncodingException {
-        for (int i = 3; i < 23; i++) {
-            String page = "&p=1&page=" + i + "&sort=0";
-            String albumHTML = getHTML("http://telugump3downloads.net/music/index.php?dir=NTR%20HITS" + page);
-            List<String> albumList = getMatches("dir=NTR\\ HITS\\/(.*?)&", albumHTML, 1);
+//        String directoryURL = "http://telugump3downloads.net/music/index.php?dir=";
+//        String directory = "NTR%20HITS";
+//        String loadURL = "http://telugump3downloads.net/music/load/";
+//        String dirPattern = "dir=NTR\\ HITS\\/(.*?)&";
+//        String filePattern = "file=load\\/NTR HITS\\/(.*?)\\/(.*?)&";
 
-            String siteURL = "http://telugump3downloads.net/music/index.php?dir=NTR%20HITS/";
-            for (String album : albumList) {
-                String songUrl = siteURL + URLEncoder.encode(album, "UTF-8") + page;
-//            System.out.println(songUrl);
-                String songHTML = getHTML(songUrl);
-                List<String> songList = getMatches("file=load\\/NTR HITS\\/(.*?)\\/(.*?)&", songHTML, 2);
-                String songSiteURL = "http://telugump3downloads.net/music/load/NTR%20HITS/";
-                for (String song : songList) {
-                    String songURL = songSiteURL + album + "/" + song;
-                    System.out.println(songURL);
-                }
+//        getAllMP3URLs(directoryURL, directory, loadURL, dirPattern, filePattern);
+
+//        http://telugump3downloads.net/music/index.php?dir=2016%20telugu%20mp3/Dhruva+%282016%29+MP3&p=1&page=1&sort=0
+
+        String directoryURL = "http://telugump3downloads.net/music/index.php?dir=";
+        String directory = "2016%20telugu%20mp3";
+        String loadURL = "http://telugump3downloads.net/music/load/";
+        String dirPattern = "dir=2016 telugu mp3\\/(.*?)&";
+        String filePattern = "file=load\\/2016 telugu mp3\\/(.*?)\\/(.*?)&";
+
+
+        List<String> albumList = new LinkedList<>();
+        albumList.add("Dhruva (2016) MP3");
+
+        String page = "&p=1&page=1&sort=0";
+        getMP3URL(directoryURL, directory, loadURL, filePattern, page, albumList);
+    }
+
+    private static void getAllMP3URLs(String directoryURL, String directory, String loadURL, String dirPattern, String filePattern) throws UnsupportedEncodingException {
+        for (int i = 3; i < 23; i++) {
+
+            String page = "&p=1&page=" + i + "&sort=0";
+            String albumHTML = getHTML(directoryURL + directory + page);
+            List<String> albumList = getMatches(dirPattern, albumHTML, 1);
+
+            getMP3URL(directoryURL, directory, loadURL, filePattern, page, albumList);
+        }
+    }
+
+    private static void getMP3URL(String directoryURL, String directory, String loadURL, String filePattern, String page, List<String> albumList) throws UnsupportedEncodingException {
+        String siteURL = directoryURL + directory + "/";
+        for (String album : albumList) {
+            String songUrl = siteURL + URLEncoder.encode(album, "UTF-8") + page;
+            String songHTML = getHTML(songUrl);
+            List<String> songList = getMatches(filePattern, songHTML, 2);
+            String songSiteURL = loadURL + directory + "/";
+            for (String song : songList) {
+                String songURL = songSiteURL + album + "/" + song;
+                System.out.println(songURL);
             }
         }
     }
