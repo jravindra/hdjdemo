@@ -51,7 +51,7 @@ public class DownloadFile {
 
         // 1. Send a "GET" request, so that you can extract the form's data.
         String page = http.GetPageContent(url);
-        String postParams = http.getFormParams(page, "to.ravindra@gmail.com", "austin316");
+        String postParams = http.getFormParams(page, "ad", "adf");
 
         // 2. Construct above post's content and then send a POST request for
         // authentication
@@ -74,7 +74,7 @@ public class DownloadFile {
                 .header("Accept-Encoding","gzip, deflate, br")
                 .header("Accept-Language","en-US,enq=0.8")
                 .header("Referer", "https://www.testingmom.com/login/")
-                .data("tm-action", "tm-login", "log", "sdfdsf", "pwd", "asdfdfd")
+                .data("tm-action", "tm-login", "log", "sd", "pwd", "asd")
                 .method(Connection.Method.POST)
                 .execute();
 
