@@ -17,7 +17,7 @@ public class ConcTwoFiles {
     public static void main(String[] args) throws IOException {
         // Files to read
         File file1 = new File("/Users/rjaraja/Downloads/psswd.txt");
-        File file2 = new File("/Users/rjaraja/Downloads/www.testingmom.com_20th_Jul_2016.txt");
+        File file2 = new File("/Users/rjaraja/Downloads/members.testingmom.com_26th_Mar_2017.txt");
 
 // File to write
         File file3 = new File("/Users/rjaraja/Downloads/download.txt");
@@ -51,6 +51,7 @@ public class ConcTwoFiles {
 
 // Write the file
         FileUtils.writeLines(file3, finalLines);
+        FileUtils.deleteQuietly(file2);
 //        FileUtils.write(file3, file2Str, true); // true for append
     }
 }
